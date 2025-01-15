@@ -9,7 +9,7 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField] private int horizontalBricksNumber;
     [SerializeField] private int verticalBricksNumber;
-    [SerializeField] private int brickTypeNumber;
+    [SerializeField] private int colorTypeNumber;
     [SerializeField] private int brickOffset;
     [SerializeField] private GameObject blueBrickPrefab;
     [SerializeField] private GameObject redBrickPrefab;
@@ -20,7 +20,7 @@ public class MapManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         instance = this;
-        MapGenerate(horizontalBricksNumber, verticalBricksNumber, brickTypeNumber);
+        MapGenerate(horizontalBricksNumber, verticalBricksNumber, colorTypeNumber);
         // DrawCircle();
     }
 
@@ -30,15 +30,15 @@ public class MapManager : MonoBehaviour
         
     }
 
-    private void MapGenerate(int horizontalBricksNumber, int verticalBricksNumber, int brickTypeNumber) {
+    private void MapGenerate(int horizontalBricksNumber, int verticalBricksNumber, int colorTypeNumber) {
         int sumBricks = horizontalBricksNumber * verticalBricksNumber;
         List<int> colorList = new List<int>();
         // 1 -> Blue
         // 2 -> Red
         // 3 -> Green
         // 4 -> Yellow
-        for (int i = 0; i < sumBricks/brickTypeNumber; i++) {
-            for (int j = 1; j <= brickTypeNumber; j++) {
+        for (int i = 0; i < sumBricks/colorTypeNumber; i++) {
+            for (int j = 1; j <= colorTypeNumber; j++) {
                 colorList.Add(j);
             }
         }
