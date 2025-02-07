@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private GameObject brickPrefab;
     [SerializeField] private Animator anim;
+    [SerializeField] private FloatingJoystick floatingJoystick;
     
     private string currentAnimName;
     int eaten;
@@ -20,15 +21,15 @@ public class Player : MonoBehaviour
     }
 
     void Update() {
-        var vel = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed;
-        vel.y = _rb.linearVelocity.y;
-        _rb.linearVelocity = vel;
-        if (vel != Vector3.zero) {
-            _rb.rotation = Quaternion.LookRotation(vel);
-        }        
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            _rb.AddForce(Vector3.up * _jumpForce);
-        }
+        // var vel = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed;
+        // vel.y = _rb.linearVelocity.y;
+        // _rb.linearVelocity = vel;
+        // if (vel != Vector3.zero) {
+        //     _rb.rotation = Quaternion.LookRotation(vel);
+        // }        
+        // if (Input.GetKeyDown(KeyCode.Space)) {
+        //     _rb.AddForce(Vector3.up * _jumpForce);
+        // }
         Vector3 beginCast = transform.forward + transform.position;
         // beginCast.z+= 5;
         Ray ray = new Ray(beginCast, Vector3.down);
@@ -50,7 +51,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f) {
+        // if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f) {
+        //     ChangeAnim("walk");
+        // } else {
+        //     ChangeAnim("idle");
+        // }
+        _rb.linearVelocity = new Vector3(floatingJoystick.Horizontal * _speed, _rb.linearVelocity.y, floatingJoystick.Vertical * _speed);
+        if (floatingJoystick.Horizontal != 0 || floatingJoystick.Vertical != 0) {
+            transform.rotation = Quaternion.LookRotation(_rb.linearVelocity);
             ChangeAnim("walk");
         } else {
             ChangeAnim("idle");
