@@ -4,34 +4,43 @@ public class Brick : MonoBehaviour
 {
     [SerializeField] private BrickColor brickColor;
     public ParticleSystem collisionParticleSystem;
+
+    private MeshRenderer meshRenderer;
+    private BoxCollider boxCollider;
+
+    private void Awake() {
+        meshRenderer = GetComponent<MeshRenderer>();
+        boxCollider = GetComponent<BoxCollider>();
+    }
+
     public BrickColor GetBrickColor() {
         return brickColor;
     }
 
     private void OnTriggerEnter(Collider collider) {
-        Brick brick = transform.gameObject.GetComponent<Brick>();
-        if (collider.CompareTag("Player") && brick.GetBrickColor() == BrickColor.Blue) {
-            var em = collisionParticleSystem.emission;
+        if (collider.CompareTag("Player")) {
+            Character character = collider.gameObject.GetComponent<Character>();
+            if ((int)GetBrickColor() == (int)character.GetCharacterType()) {
+                var em = collisionParticleSystem.emission;
+                em.enabled = true;
+                collisionParticleSystem.Play();
 
-            em.enabled = true;
-            collisionParticleSystem.Play();
-
-            Deactive();
-            Invoke(nameof(Active), 2.0f);
-            
+                Deactivate();
+                Invoke(nameof(Activate), 2.0f);
+            }
         }
     }
 
-    private void Active() {
-        // transform.gameObject.SetActive(true);
-        GetComponent<MeshRenderer>().enabled = true;
-        GetComponent<BoxCollider>().enabled = true;
+    private void Activate() {
+        //transform.gameObject.SetActive(true);
+        meshRenderer.enabled = true;
+        boxCollider.enabled = true;
     }
 
-    private void Deactive() {
-        // transform.gameObject.SetActive(false);
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
+    private void Deactivate() {
+        //transform.gameObject.SetActive(false);
+        meshRenderer.enabled = false;
+        boxCollider.enabled = false;
     }
 }
 
