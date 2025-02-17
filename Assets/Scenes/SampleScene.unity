@@ -1609,12 +1609,12 @@ GameObject:
   - component: {fileID: 977603491}
   - component: {fileID: 977603490}
   - component: {fileID: 977603489}
-  - component: {fileID: 977603493}
   - component: {fileID: 977603487}
   - component: {fileID: 977603486}
+  - component: {fileID: 977603493}
   m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Player
+  m_Name: Bot
+  m_TagString: Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1632,13 +1632,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 0
-  blueBrickPrefab: {fileID: 6285941402718980044, guid: 3920aa74fda00e1468dcb7ad8dd6bdc4, type: 3}
-  redBrickPrefab: {fileID: 6285941402718980044, guid: be08af1ffa68ed443a71748f131997c7, type: 3}
-  greenBrickPrefab: {fileID: 6285941402718980044, guid: 2520517b4d6c083489e2e56fcf8b0ccc, type: 3}
-  yellowBrickPrefab: {fileID: 6285941402718980044, guid: fd9767c980ef09d449d7339bf6c94a9c, type: 3}
   anim: {fileID: 0}
-  waypoints:
-  - {fileID: 5302853827577609715, guid: be08af1ffa68ed443a71748f131997c7, type: 3}
+  target: {fileID: 371930058}
+  maxBricksToCollect: 5
 --- !u!195 &977603487
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1745,7 +1741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977603485}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -17.36, y: 9.95, z: 2}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -1777,7 +1773,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 90
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!4 &1016242615 stripped
 Transform:
@@ -2427,16 +2423,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterType: 2
-  blueBrickPrefab: {fileID: 6285941402718980044, guid: 3920aa74fda00e1468dcb7ad8dd6bdc4, type: 3}
-  redBrickPrefab: {fileID: 6285941402718980044, guid: be08af1ffa68ed443a71748f131997c7, type: 3}
-  greenBrickPrefab: {fileID: 6285941402718980044, guid: 2520517b4d6c083489e2e56fcf8b0ccc, type: 3}
-  yellowBrickPrefab: {fileID: 6285941402718980044, guid: fd9767c980ef09d449d7339bf6c94a9c, type: 3}
   anim: {fileID: 220539428}
   _speed: 25
-  _jumpForce: 200
   _rb: {fileID: 1591542291}
   brickPrefab: {fileID: 6285941402718980044, guid: 3920aa74fda00e1468dcb7ad8dd6bdc4, type: 3}
-  anim: {fileID: 220539428}
   floatingJoystick: {fileID: 755511844}
 --- !u!54 &1591542291
 Rigidbody:
@@ -2881,9 +2871,9 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1318756866}
   - {fileID: 1591542289}
+  - {fileID: 977603492}
   - {fileID: 1988009130}
   - {fileID: 415806763}
   - {fileID: 604633769}
   - {fileID: 1529133163}
   - {fileID: 371930058}
-  - {fileID: 977603492}

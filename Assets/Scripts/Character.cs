@@ -3,10 +3,6 @@ using UnityEngine.AI;
 
 public class Character : MonoBehaviour {
     [SerializeField] private CharacterType characterType;
-    [SerializeField] private GameObject blueBrickPrefab;
-    [SerializeField] private GameObject redBrickPrefab;
-    [SerializeField] private GameObject greenBrickPrefab;
-    [SerializeField] private GameObject yellowBrickPrefab;
     [SerializeField] private Animator anim;
     protected int eaten;
     private string currentAnimName;
@@ -16,7 +12,7 @@ public class Character : MonoBehaviour {
         return characterType;
     }
 
-    public Color getCharacterTypeColor() {
+    public Color GetCharacterTypeColor() {
         switch (characterType) {
             case CharacterType.Red:
                 return Color.red;
@@ -31,8 +27,8 @@ public class Character : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        
+    public int GetEaten() {
+        return eaten;
     }
 
     protected void OnTriggerEnter(Collider collider) {
@@ -41,17 +37,10 @@ public class Character : MonoBehaviour {
             if ((int)brick.GetBrickColor() == (int)GetCharacterType()) {
                 Vector3 eatenBrickPosition = transform.position;
                 eatenBrickPosition.y += eaten;
-                GameObject brickPrefab = MapManager.instance.GetBrickPrefab(getCharacterTypeColor());
+                GameObject brickPrefab = MapManager.instance.GetBrickPrefab(GetCharacterTypeColor());
                 CreateBrickOnTop(brickPrefab, eatenBrickPosition);
                 eaten++;
             }
-        }
-    }
-
-    protected virtual void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Finish") && isWinning == false) {
-            ChangeAnim("celebrate");
-            isWinning = true;
         }
     }
 

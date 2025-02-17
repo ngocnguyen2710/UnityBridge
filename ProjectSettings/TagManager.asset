@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Brick
   - Bridge
+  - Bot
   layers:
   - Default
   - TransparentFX

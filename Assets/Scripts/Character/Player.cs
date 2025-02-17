@@ -30,7 +30,7 @@ public class Player : Character
                 if (eaten > 0 && (int)bridge.GetBridgeColor() != (int)GetCharacterType()) {
                     //set the bridge color to player color
                     bridge.SetBridgeColor((int)GetCharacterType());
-                    bridgeObject.GetComponent<MeshRenderer>().material.color = getCharacterTypeColor();
+                    bridgeObject.GetComponent<MeshRenderer>().material.color = GetCharacterTypeColor();
                     //destroy the brick on top of the player
                     Destroy(transform.GetChild(transform.childCount - 1).gameObject);
                     eaten--;
@@ -58,7 +58,7 @@ public class Player : Character
         }
     }
 
-    protected override void OnCollisionEnter(Collision collision) {
+    protected void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.CompareTag("Finish") && isWinning == false) {
             ChangeAnim("celebrate");
             isWinning = true;
@@ -70,6 +70,12 @@ public class Player : Character
             _rb.angularVelocity = Vector3.zero;
 
             WinGame();
+        }
+        Character otherCharacter = collision.gameObject.GetComponent<Character>();
+        if (otherCharacter is Bot) {
+            if (eaten > otherCharacter.GetEaten()) {
+                
+            }
         }
     }
 
