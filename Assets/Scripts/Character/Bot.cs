@@ -37,6 +37,10 @@ public class Bot : Character
 
                 returningToTarget = true;
                 agent.SetDestination(target.position);
+                for (int i=0; i < 10; i++){
+                    // wait 10 frames
+                    yield return null;
+                }
                 while (agent.remainingDistance > 0.5f)
                 {
                     yield return null;
